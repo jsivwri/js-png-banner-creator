@@ -67,8 +67,7 @@
         return ctx;
       };
 
-      const download = function (text) {
-        preview(text); // predrawing is currently necessary
+      const download = function () {
         const downloadLink = document.createElement("a");
         downloadLink.setAttribute("download", "banner.png");
         const canvas = document.getElementById("canvas");
