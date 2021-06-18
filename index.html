@@ -27,18 +27,16 @@
         <div class="card-header">Create new banner</div>
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-lael" for="user_text">Enter text:</label
+            <label class="form-label" for="user_text">Enter text:</label
             ><input
               class="form-control"
               type="text"
               name="user_text"
               x-model="text"
+              @keyup="preview(text)"
             />
           </div>
           <div class="mb-3">
-            <button class="btn btn-outline-primary" @click="preview(text)">
-              Preview
-            </button>
             <button class="btn btn-primary" @click="download(text)">
               Download
             </button>
@@ -51,10 +49,11 @@
 
     <script>
       const preview = function (text) {
-        var c = document.getElementById("canvas");
-        var ctx = c.getContext("2d");
+        const c = document.getElementById("canvas");
+        const ctx = c.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         // Create gradient
-        var grd = ctx.createLinearGradient(0, 0, 800, 0);
+        const grd = ctx.createLinearGradient(0, 0, 800, 0);
         grd.addColorStop(0, "black");
         grd.addColorStop(1, "transparent");
         // Fill with gradient
@@ -74,7 +73,7 @@
         downloadLink.setAttribute("download", "banner.png");
         const canvas = document.getElementById("canvas");
         canvas.toBlob(function (blob) {
-          let url = URL.createObjectURL(blob);
+          const url = URL.createObjectURL(blob);
           downloadLink.setAttribute("href", url);
           downloadLink.click();
         });
